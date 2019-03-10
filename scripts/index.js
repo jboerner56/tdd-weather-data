@@ -12,8 +12,17 @@ function locationName(object) {
 function addTemp (object){
     // why does it have to have .main in the variable
     const temp = object.main.temp;
-    return `Temperature: ${temp}`;
-
+    // math to convert temp to F
+    const conToF = (temp - 273.15) * (9-5) + 32;
+    // returning the temp to be displayed
+    // return `Temperature: ${conToF}`;
+    // same as above but rounds the value for better display purposes
+    return `Temperature: ${Math.round(conToF)} degrees (F)`;
+}
+function windSpeed(object){
+    const wind = object.wind.speed;
+    const mphWind = wind * 2.23
+    return `Wind speed: ${mphWind} (mph)`
 }
 // function to add whatever data is passed into the weather div
 function addDataToWeather(data){
@@ -27,7 +36,8 @@ function addDataToWeather(data){
 
 // calling the functions
 addDataToWeather(locationName(atlWeather));
-addDataToWeather(addTemp(atlWeather))
+addDataToWeather(addTemp(atlWeather));
+addDataToWeather(windSpeed(atlWeather));
 
 
 // // Implement the following functions to fulfill the tests!
