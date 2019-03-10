@@ -10,7 +10,7 @@ function locationName(object) {
 }
 // temp for the given city
 function addTemp (object){
-    // why does it have to have .main in the variable
+    // variable to pull temp data
     const temp = object.main.temp;
     // math to convert temp to F
     const conToF = (temp - 273.15) * (9-5) + 32;
@@ -19,11 +19,16 @@ function addTemp (object){
     // same as above but rounds the value for better display purposes
     return `Temperature: ${Math.round(conToF)} degrees (F)`;
 }
+// wind speed
 function windSpeed(object){
+    // variable wind speed will be assigned to
     const wind = object.wind.speed;
+    // variable to convert the sind speep to mph
     const mphWind = wind * 2.23
+    // returning the text string with the converted wind speed
     return `Wind speed: ${mphWind} (mph)`
 }
+
 // function to add whatever data is passed into the weather div
 function addDataToWeather(data){
     // will create new h3 element to display the data
@@ -33,12 +38,27 @@ function addDataToWeather(data){
     weatherDiv.append(newData)
 }
 
-
+// create map using lat and lon data
+function addMap(object){
+    // variables for the lat and lon
+    const lat = object.coord.lat;
+    const lon = object.coord.lon;
+    // source url for a google map
+    const map = `http://maps.google.com/maps?q=${lat},${lon}&output=embed`;
+    // create iframe and set attributes
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('src', map);
+    iframe.setAttribute('height', 270);
+    iframe.setAttribute('width', 360);
+    iframe.setAttribute('frameboarder', 0);
+    // need to append the set iframe for it to show up
+    weatherDiv.append(iframe);
+}
 // calling the functions
 addDataToWeather(locationName(atlWeather));
 addDataToWeather(addTemp(atlWeather));
 addDataToWeather(windSpeed(atlWeather));
-
+addDataToWeather(addMap(atlWeather));
 
 // // Implement the following functions to fulfill the tests!
 // function getLocationName(atlWeather) {
