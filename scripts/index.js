@@ -54,11 +54,24 @@ function addMap(object){
     // need to append the set iframe for it to show up
     weatherDiv.append(iframe);
 }
+// let theWeather;
+// api url the data is coming from
+const URL = "http://api.openweathermap.org/data/2.5/weather?q=Atlanta,US&APPID=2402706c5ba24136cc05967bee9e5a2e";
+// use fetch (variable added to fetch function)
+fetch(URL)
+// 
+    .then(function(response){
+        return response.json()
+    }).then (function(weatherData){
+        console.log(weatherData)
+        theWeather = weatherData
+        addDataToWeather(locationName(theWeather));
+        addDataToWeather(addTemp(theWeather));
+        addDataToWeather(windSpeed(theWeather));
+        addDataToWeather(addMap(theWeather));
+    });
 // calling the functions
-addDataToWeather(locationName(atlWeather));
-addDataToWeather(addTemp(atlWeather));
-addDataToWeather(windSpeed(atlWeather));
-addDataToWeather(addMap(atlWeather));
+
 
 // // Implement the following functions to fulfill the tests!
 // function getLocationName(atlWeather) {
